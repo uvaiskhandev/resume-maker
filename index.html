@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Builder | Gemini Powered</title>
+  <meta
+    name="description"
+    content="Free AI Resume Builder using Gemini API. Create ATS-friendly resumes, improve summary, skills, projects, and download as PDF."
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">AI</div>
+      <div>
+        <h1>Resume Builder</h1>
+        <p>Gemini Powered • ATS Friendly • Free Setup</p>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button id="themeToggle" class="ghost-btn" type="button">🌙 Theme</button>
+      <button id="printResumeBtn" class="primary-btn" type="button">Download PDF</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="form-panel card">
+      <div class="section-head">
+        <h2>Build Your Resume</h2>
+        <p>Fill details, then generate an AI-improved resume.</p>
+      </div>
+
+      <form id="resumeForm" novalidate>
+        <div class="grid two">
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Uvais Khan" required />
+          </div>
+
+          <div class="field">
+            <label for="jobTitle">Target Job Role</label>
+            <input id="jobTitle" name="jobTitle" type="text" placeholder="Front-End Developer" required />
+          </div>
+        </div>
+
+        <div class="grid three">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="text" placeholder="+91 XXXXX XXXXX" />
+          </div>
+
+          <div class="field">
+            <label for="location">Location</label>
+            <input id="location" name="location" type="text" placeholder="Bareilly, Uttar Pradesh" />
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div class="field">
+            <label for="linkedin">LinkedIn</label>
+            <input id="linkedin" name="linkedin" type="text" placeholder="linkedin.com/in/yourname" />
+          </div>
+
+          <div class="field">
+            <label for="portfolio">Portfolio / Website</label>
+            <input id="portfolio" name="portfolio" type="text" placeholder="https://yourportfolio.com" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="currentSummary">Current Summary / Objective</label>
+          <textarea
+            id="currentSummary"
+            name="currentSummary"
+            rows="4"
+            placeholder="Write a basic intro about yourself..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="skills">Skills</label>
+          <textarea
+            id="skills"
+            name="skills"
+            rows="4"
+            placeholder="HTML, CSS, JavaScript, React, MS Office, Graphic Design..."
+          ></textarea>
+          <small>Comma ya new line dono chalega.</small>
+        </div>
+
+        <div class="field">
+          <label for="education">Education</label>
+          <textarea
+            id="education"
+            name="education"
+            rows="5"
+            placeholder="Example:
+Diploma in Computer Application - ABC Institute - 2024
+12th - UP Board - 2025"
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="experience">Experience</label>
+          <textarea
+            id="experience"
+            name="experience"
+            rows="6"
+            placeholder="Example:
+Freelance Graphic Designer - Fiverr - 2024 to Present
+Created social media posts, banners, thumbnails..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="projects">Projects</label>
+          <textarea
+            id="projects"
+            name="projects"
+            rows="6"
+            placeholder="Example:
+Personal Portfolio Website - Built with HTML, CSS, JS
+Instagram Caption Generator - SEO friendly web app..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="certifications">Certifications / Achievements</label>
+          <textarea
+            id="certifications"
+            name="certifications"
+            rows="4"
+            placeholder="Diploma in Computer Application, Best Freelancer Award..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="jobDescription">Job Description (Optional but Powerful)</label>
+          <textarea
+            id="jobDescription"
+            name="jobDescription"
+            rows="6"
+            placeholder="Paste the job description here to tailor the resume..."
+          ></textarea>
+        </div>
+
+        <div class="grid two">
+          <div class="field">
+            <label for="template">Resume Template</label>
+            <select id="template" name="template">
+              <option value="modern">Modern</option>
+              <option value="classic">Classic</option>
+              <option value="minimal">Minimal</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="experienceLevel">Experience Level</label>
+            <select id="experienceLevel" name="experienceLevel">
+              <option value="fresher">Fresher</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="experienced">Experienced</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="generateBtn" class="primary-btn" type="submit">Generate AI Resume</button>
+          <button id="fillSampleBtn" class="ghost-btn" type="button">Fill Demo Data</button>
+          <button id="clearBtn" class="ghost-btn" type="button">Clear</button>
+        </div>
+
+        <div id="statusBox" class="status-box hidden" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section class="preview-panel card">
+      <div class="preview-head">
+        <div>
+          <h2>Live Preview</h2>
+          <p>AI-generated content yahan dikhega.</p>
+        </div>
+        <button id="copyTextBtn" class="ghost-btn" type="button">Copy Resume Text</button>
+      </div>
+
+      <article id="resumePreview" class="resume modern">
+        <div class="resume-empty">
+          <h3>Your resume preview will appear here</h3>
+          <p>Form fill karo aur AI generate button dabao.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
